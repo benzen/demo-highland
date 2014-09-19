@@ -1,0 +1,20 @@
+{
+  "name": "demo-highland",
+  "version": "0.0.0",
+  "authors": [
+    "Benjamin Dreux <benjamin.dreux@code3.ca>"
+  ],
+  "main": "index.html",
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
