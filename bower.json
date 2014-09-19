@@ -16,5 +16,9 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "highland": "~1.29.0",
+    "jquery": "~2.1.1"
+  }
 }

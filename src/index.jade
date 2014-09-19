@@ -1,2 +1,24 @@
 body
-  p hello world
+  head
+    script(src="/js/jquery.js")
+    script(src="/js/highland.js")
+    script.
+      $(document).ready(function(){
+        doYourThings();
+      });
+      var doYourThings = function(){
+
+        highland('keyup',$('#fld'))
+        .debounce(1000)
+        .latest()
+        .map(function(event){ return encodeURIComponent($('#fld').val()); })
+        .map(function(encodedSearchTerms){ return highland($.ajax("search.html?param="+encodedSearchTerms)); })
+        .merge()
+        .errors(function(err, push){ push(null, {}); })
+        .each(function(result){ $('#content').html(result) })
+
+      }
+
+  p Search bounced
+  input#fld(type="text")
+  div#content
