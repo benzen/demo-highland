@@ -8,6 +8,7 @@ html
       });
       var doYourThings = function(){
 
+        //Search bounced
         highland('keyup',$('#fld'))
         .debounce(1000)
         .latest()
@@ -17,6 +18,7 @@ html
         .errors(function(err, push){ push(null, {}); })
         .each(function(result){ $('#content').html(result) })
 
+        //click coordination
         var counter = 1;
         var click1 = highland('click',$('button#btn1'));
         var click2 = highland('click',$('button#btn2'));
@@ -25,6 +27,37 @@ html
           .each(function(){
             $('#score-board').html("<p>" + counter++ +"</p>");
           });
+
+        //work in //
+        var data = [10,20,40,50,80,10,20,304,204,432,432,432,432,432,432121,543,543,5432523,432,321,321,432654,654,765,231543,543765,765432,543]
+        var s = highland(data)
+        var s1 = s.fork();
+        var s2 = s.fork();
+        s1.filter(function(x){ return x % 2 })
+          .consume(function(err, x, push, next){
+            if(x === highland.nil){
+              push(null,x);
+            }else{
+              console.log("even says"+x);
+              push(null,x);
+              next();
+            }
+          }).resume();
+        console.log("s1 is started")
+        s2.reject(function(x){ return x % 2})
+          .consume(function(err, x, push, next){
+            if(x === highland.nil){
+              push(null,x);
+            }else{
+              console.log("odd says"+x);
+              push(null,x);
+              next();
+            }
+          }).resume();
+          console.log("s2 is started")
+        //theses console log should interleave in an unpredictable manner
+
+
 
       }
   body
@@ -36,5 +69,7 @@ html
     button#btn1 Click me
     button#btn2 Click me first
 
-    p Scores&nbsp;
-      span#score-board 0
+    p Scores
+    #score-board 0
+
+    p work on data in //
