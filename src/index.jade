@@ -1,4 +1,4 @@
-body
+html
   head
     script(src="/js/jquery.js")
     script(src="/js/highland.js")
@@ -17,8 +17,24 @@ body
         .errors(function(err, push){ push(null, {}); })
         .each(function(result){ $('#content').html(result) })
 
-      }
+        var counter = 1;
+        var click1 = highland('click',$('button#btn1'));
+        var click2 = highland('click',$('button#btn2'));
+        highland([click1,click2])
+          .merge()
+          .each(function(){
+            $('#score-board').html("<p>" + counter++ +"</p>");
+          });
 
-  p Search bounced
-  input#fld(type="text")
-  div#content
+      }
+  body
+    p Search bounced
+    input#fld(type="text")
+    div#content
+
+    p click coordination
+    button#btn1 Click me
+    button#btn2 Click me first
+
+    p Scores&nbsp;
+      span#score-board 0
